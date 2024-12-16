@@ -288,7 +288,7 @@ const Posts = () => {
               <Button
                 className="p-2 md:p-4 text-xs md:text-sm flex flex-col md:flex-row gap-1 md:gap-2 items-center rounded-small"
                 color="default"
-                size="md"
+                size="sm"
                 variant="light"
                 onClick={() => {
                   post.isLiked
