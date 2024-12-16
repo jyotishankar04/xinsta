@@ -27,7 +27,7 @@ const Page = () => {
             color="primary"
             size="sm"
             onClick={() => {
-              router.push("/onboard");
+              router.push("/auth/onboard");
             }}
           >
             Verify
