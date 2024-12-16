@@ -1,8 +1,9 @@
+/* eslint-disable prettier/prettier */
 "use client";
 
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
-import { Avatar, AvatarGroup, AvatarIcon } from "@nextui-org/avatar";
-import { Input, Textarea } from "@nextui-org/input";
+import { Avatar } from "@nextui-org/avatar";
+import { Textarea } from "@nextui-org/input";
 import { DatePicker } from "@nextui-org/date-picker";
 import { Button } from "@nextui-org/button";
 import { useState } from "react";

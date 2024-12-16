@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import "@/styles/globals.css";
 import { Metadata } from "next";
 import clsx from "clsx";

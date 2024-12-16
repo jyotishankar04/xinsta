@@ -2,8 +2,6 @@
 
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import { InputOtp } from "@nextui-org/input-otp";
-import { Input } from "@nextui-org/input";
-import Link from "next/link";
 import React from "react";
 import { Button } from "@nextui-org/button";
 import { useRouter } from "next/navigation";
@@ -25,12 +23,12 @@ const Page = () => {
         <form className="flex flex-col gap-6 items-center">
           <InputOtp length={6} variant="flat" />
           <Button
-            onClick={() => {
-              router.push("/onboard");
-            }}
             className="w-full mt-4"
             color="primary"
             size="sm"
+            onClick={() => {
+              router.push("/onboard");
+            }}
           >
             Verify
           </Button>
