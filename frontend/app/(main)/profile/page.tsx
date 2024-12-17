@@ -10,7 +10,6 @@ import Posts from "@/components/feed/posts";
 const page = () => {
   return (
     <div className="w-[90%] m-auto h-full flex justify-start flex-col items-center">
-      <h1 className="text-2xl font-semibold">Profile</h1>
       <div className="w-full flex flex-col justify-start items-center gap-5">
         <Card className="w-full rounded-md p-2">
           <CardHeader className="flex justify-start gap-8 items-center">
