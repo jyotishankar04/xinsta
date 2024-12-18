@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 "use client";
 
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";

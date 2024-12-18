@@ -4,7 +4,6 @@ import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
 import Image from "next/image";
 import {
   FaBookmark,
-  FaCommentAlt,
   FaHeart,
   FaRegBookmark,
   FaRegHeart,
