@@ -60,7 +60,7 @@ const Sidebar = () => {
         {menu.map((item, index) => (
           <Link key={index} className="w-full" href={item.link}>
             <Button
-              className="flex w-fit md:w-full text-2xl md:text-xl opacity-70 gap-3 justify-start items-center"
+              className="flex w-fit rounded-none md:rounded-md md:w-full text-2xl md:text-xl opacity-70 gap-0 md:gap-3 justify-start items-center"
               variant="light"
             >
               {item.icon}
