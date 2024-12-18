@@ -63,7 +63,7 @@ const page = () => {
             </div>
           </CardBody>
         </Card>
-        <div>
+        <div className="w-full">
           <Posts />
         </div>
       </div>

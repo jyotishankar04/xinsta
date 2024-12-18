@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 "use client";
 
-import { Card, CardBody, CardHeader } from "@nextui-org/card";
+import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
 import { Avatar } from "@nextui-org/avatar";
 import { Textarea } from "@nextui-org/input";
 import { DatePicker } from "@nextui-org/date-picker";
@@ -39,13 +39,13 @@ const Page = () => {
             Welcome to XInsta
           </h1>
         </CardHeader>
-        <CardBody className="grid grid-cols-2">
+        <CardBody className="grid xl:grid-cols-2 w-full grid-cols-1 ">
           <div className="relative flex justify-center items-center">
             {/* Image */}
             <div className="relative w-fit h-fit">
               <Avatar
                 alt="User Avatar"
-                className="w-52 aspect-square h-52"
+                className="xl:w-52 xl:h-52 w-40 h-40 aspect-square "
                 size="lg"
                 src={image}
               />
@@ -64,10 +64,16 @@ const Page = () => {
 
             {/* Pencil Icon */}
           </div>
-          <div className="flex justify-center items-center flex-col gap-5">
-            <h1>Enter your details</h1>
-            <form className="flex flex-col gap-6 items-center">
-              <DatePicker label="Date of Birth" variant="underlined" />
+          <div className="flex w-full justify-center items-center flex-col gap-5">
+            <h1 className="text-xl font-semibold mt-5 xl:mt-0">
+              Enter your details
+            </h1>
+            <form className="flex flex-col gap-6 w-10/12 items-center">
+              <DatePicker
+                label="Date of Birth"
+                className="w-full"
+                variant="underlined"
+              />
               <Textarea
                 height={"100"}
                 label="Bio"
@@ -77,18 +83,18 @@ const Page = () => {
               />
             </form>
           </div>
-          <div className="flex col-span-2 justify-center items-center">
-            <Button
-              className="mt-10 w-full"
-              color="primary"
-              onClick={() => {
-                router.push("/profile");
-              }}
-            >
-              Update Profile
-            </Button>
-          </div>
         </CardBody>
+        <CardFooter>
+          <Button
+            className="w-10/12 m-auto mt-4"
+            color="primary"
+            onClick={() => {
+              router.push("/profile");
+            }}
+          >
+            Update Profile
+          </Button>
+        </CardFooter>
       </Card>
     </div>
   );

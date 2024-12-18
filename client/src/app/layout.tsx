@@ -1,11 +1,9 @@
-/* eslint-disable prettier/prettier */
 import "@/styles/globals.css";
 import { Metadata } from "next";
 import clsx from "clsx";
 
 import { Providers } from "./providers";
 
-import { fontSans } from "@/config/fonts";
 import Navbar from "@/components/navbar";
 
 export const metadata: Metadata = {
@@ -26,8 +24,7 @@ export default function RootLayout({
       <head />
       <body
         className={clsx(
-          "min-h-screen w-full bg-background font-sans antialiased",
-          fontSans.variable
+          "min-h-screen w-full bg-background font-sans antialiased"
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
