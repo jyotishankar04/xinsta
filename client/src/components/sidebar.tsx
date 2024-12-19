@@ -7,8 +7,8 @@ import { TiMessages } from "react-icons/ti";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { CiUser } from "react-icons/ci";
 import { CiSettings } from "react-icons/ci";
-import { Button } from "@nextui-org/button";
-import { FaRegSave } from "react-icons/fa";
+import { IoSaveOutline } from "react-icons/io5";
+import { TbMessageCircle } from "react-icons/tb";
 
 const Sidebar = () => {
   const menu = [
@@ -35,12 +35,12 @@ const Sidebar = () => {
     {
       name: "Messages",
       link: "/messages",
-      icon: <TiMessages />,
+      icon: <TbMessageCircle />,
     },
     {
       name: "Saved",
       link: "/saved",
-      icon: <FaRegSave />,
+      icon: <IoSaveOutline />,
     },
     {
       name: "Profile",
@@ -55,17 +55,14 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="col-span-1 md:w-full sticky top-20">
-      <ul className="mt-6 flex flex-col gap-2">
-        {menu.map((item, index) => (
-          <Link key={index} className="w-full" href={item.link}>
-            <Button
-              className="flex w-fit rounded-none md:rounded-md md:w-full text-2xl md:text-xl opacity-70 gap-0 md:gap-3 justify-start items-center"
-              variant="light"
-            >
-              {item.icon}
+    <div className="col-span-1 md:w-full sticky top-20 w-full">
+      <ul className="mt-6 flex flex-col gap-2 w-h-full">
+        {menu.map((item) => (
+          <Link href={item.link} key={item.name}>
+            <li className="flex items-center text-xl gap-4  px-4 py-2 rounded-md hover:bg-default-50">
+              <span className="font-semibold">{item.icon}</span>
               <span className="md:block hidden">{item.name}</span>
-            </Button>
+            </li>
           </Link>
         ))}
       </ul>
