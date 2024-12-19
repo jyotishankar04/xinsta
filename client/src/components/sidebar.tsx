@@ -3,7 +3,6 @@ import React from "react";
 import { CiHome } from "react-icons/ci";
 import { MdOutlineExplore } from "react-icons/md";
 import { CiSearch } from "react-icons/ci";
-import { TiMessages } from "react-icons/ti";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { CiUser } from "react-icons/ci";
 import { CiSettings } from "react-icons/ci";
