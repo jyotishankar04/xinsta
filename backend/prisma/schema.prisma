@@ -14,16 +14,22 @@ datasource db {
 }
 
 model User {
-  id         String    @id @default(uuid())
-  email      String    @unique
-  password   String
-  name       String
+  id       String  @id @default(uuid())
+  email    String  @unique
+  password String
+  name     String
+  username String  @unique
+  avatar   String?
+
   isVerified Boolean   @default(false)
   lastLogin  DateTime? @default(now())
+  dob        DateTime?
+  bio        String?
 
   //  tokens
-  resetPasswordToken    String?
-  resetPasswordExpires  DateTime?
+  resetPasswordToken   String?
+  resetPasswordExpires DateTime?
+
   verifyPasswordToken   String?
   verifyPasswordExpires DateTime?
 
