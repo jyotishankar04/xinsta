@@ -5,6 +5,7 @@ import { _config } from "../../../config/envConfig";
 import { sendEmail } from "../../../config/mailtrap.config";
 import { getVerificationCodeTemplate } from "../../../constants/email.template";
 import prisma from "../../../config/prisma.config";
+import { NextFunction, Request, Response } from "express";
 
 const generateOTP = () => {
   return crypto.randomInt(100000, 1000000).toString();
@@ -73,6 +74,21 @@ const emailVerificationProcess = async (email: string): Promise<boolean> => {
   }
 };
 
+const logoutUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<any> => {
+  try {
+    res.clearCookie("authToken");
+    res
+      .status(200)
+      .json({ success: true, message: "User logged out successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export {
   generateOTP,
   gethashedPassword,
@@ -81,4 +97,5 @@ export {
   verifyAuthJWTtoken,
   emailVerificationProcess,
   getResetPasswordToken,
+  logoutUser,
 };

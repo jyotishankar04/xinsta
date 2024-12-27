@@ -20,6 +20,7 @@ model User {
   name     String
   username String  @unique
   avatar   String?
+  avatarId String?
 
   isVerified Boolean   @default(false)
   lastLogin  DateTime? @default(now())

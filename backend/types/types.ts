@@ -5,4 +5,7 @@ export interface CustomRequest extends Request {
     id: string;
     email: string;
   };
+  files?: {
+    avatar: Express.Multer.File[];
+  };
 }
