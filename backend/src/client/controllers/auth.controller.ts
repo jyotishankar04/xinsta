@@ -22,6 +22,7 @@ import {
   resetSuccessfullPage,
 } from "../../../constants/email.template";
 import { _config } from "../../../config/envConfig";
+import { getZodErrorMessage } from "../../../utils/error.utils";
 
 const signUp = async (
   req: Request,
@@ -36,7 +37,7 @@ const signUp = async (
       password,
     });
     if (!validator.success) {
-      return next(createHttpError(400, validator.error.message));
+      return next(createHttpError(400, getZodErrorMessage(validator)));
     }
     const isUserExists = await prisma.user.findUnique({
       where: {
@@ -232,6 +233,15 @@ const login = async (
           )
         );
       }
+
+      const loginUpdate = await prisma.user.update({
+        where: {
+          id: user.id,
+        },
+        data: {
+          lastLogin: new Date() as Date,
+        },
+      });
       return res.status(200).json({
         success: true,
         message: "OTP sent successfully! Please verify your email",
@@ -292,7 +302,7 @@ const resetPassword = async (
     });
     const { error } = validate.safeParse({ email });
     if (error) {
-      return next(createHttpError(400, error.message));
+      return next(createHttpError(400, getZodErrorMessage({ error })));
     }
     const user = await prisma.user.findUnique({
       where: {
@@ -336,119 +346,6 @@ const resetPassword = async (
       success: true,
       message: "Password reset email sent successfully",
     });
-
-    // You can also send an email here, as mentioned in the comment.
-
-    // Return HTML response for the password reset page
-    // const htmlResponse = `
-    //   <html>
-    //     <head>
-    //       <title>Reset Password</title>
-    //       <style>
-    //         body {
-    //           font-family: Arial, sans-serif;
-    //           background-color: #f7f9fc;
-    //           padding: 0;
-    //           margin: 0;
-    //           color: #333;
-    //         }
-    //         .container {
-    //           max-width: 450px;
-    //           margin: 50px auto;
-    //           background-color: #ffffff;
-    //           padding: 20px;
-    //           border-radius: 8px;
-    //           box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    //           text-align: center;
-    //         }
-    //         h2 {
-    //           color: #4a90e2;
-    //           font-size: 24px;
-    //           margin-bottom: 20px;
-    //         }
-    //         .header {
-    //           background: #f4f4f4;
-    //           text-align: center;
-    //           padding: 20px;
-    //         }
-    //         .logo {
-    //           font-size: 36px;
-    //           font-weight: bold;
-    //           line-height: 1;
-    //         }
-    //         .logo .x {
-    //           color: #007BFF;
-    //           font-size: 48px;
-    //         }
-    //         .logo .a {
-    //           color: #FF0000;
-    //           font-size: 48px;
-    //           position: relative;
-    //           bottom: -10px;
-    //         }
-    //         input {
-    //           width: 90%;
-    //           padding: 12px;
-    //           margin: 10px 0;
-    //           border: 1px solid #ddd;
-    //           border-radius: 4px;
-    //           font-size: 16px;
-    //         }
-    //         button {
-    //           width: 100%;
-    //           padding: 12px;
-    //           background-color: #4a90e2;
-    //           color: white;
-    //           border: none;
-    //           border-radius: 4px;
-    //           font-size: 16px;
-    //           cursor: pointer;
-    //           transition: background-color 0.3s;
-    //         }
-    //         button:hover {
-    //           background-color: #357ab7;
-    //         }
-    //         .footer {
-    //           margin-top: 20px;
-    //           font-size: 12px;
-    //           color: #888;
-    //         }
-    //         #form{
-    //           display: flex;
-    //           flex-direction: column;
-    //           justify-content:center ;
-    //           /* align-items: center; */
-
-    //         }
-    //       </style>
-    //     </head>
-    //     <body>
-    //       <div class="container">
-    //         <div class="header">
-    //           <div class="logo">
-    //             <span class="x">X</span>Inst<span class="a">a</span>
-    //           </div>
-    //         </div>
-    //         <h2>Reset Your Password</h2>
-    //         <p>Enter a new password to reset your account password.</p>
-    //         <form id="form" action="/api/v1/auth/reset-password/${token}" method="POST">
-    //           <div>
-    //             <label for="password">New Password</label>
-    //             <input type="password" id="password" name="password" required />
-    //           </div>
-    //           <div>
-    //             <label for="confirmPassword">Confirm Password</label>
-    //             <input type="password" id="confirmPassword" name="confirmPassword" required />
-    //           </div>
-    //           <button type="submit">Update Password</button>
-    //         </form>
-    //         <div class="footer">
-    //           <p>If you didn't request a password reset, please ignore this email.</p>
-    //         </div>
-    //       </div>
-    //     </body>
-    //   </html>
-    // `;
   } catch (error) {
     console.log(error);
     return next(createHttpError(500, "Failed to reset password"));

@@ -7,6 +7,10 @@ const router = express.Router();
 
 router.use(authMiddleware);
 
-router.put("/", upload.fields([{ name: "avatar", maxCount: 1 }]), updateUser);
+router.put(
+  "/onboard",
+  upload.fields([{ name: "avatar", maxCount: 1 }]),
+  updateUser
+);
 
 export default router;

@@ -36,4 +36,67 @@ model User {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
+
+  Posts    Post[] // one to many with posts
+  Comments Comment[] // one to many with comments
+  Likes    Like[] // one to many with likes
+}
+
+model Post {
+  id      String  @id @default(uuid())
+  caption String?
+
+  author   User   @relation(fields: [authorId], references: [id]) // many to one with user
+  authorId String
+
+  likesCount    Int @default(0)
+  commentsCount Int @default(0)
+
+  Images   Image[] // one to many with images
+  Likes    Like[] // one to many with likes
+  Comment  Comment[] // one to many with comments
+  hashtags Hashtag[] // many to many with hashtags
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Image {
+  id       String @id @default(uuid())
+  url      String
+  publicId String
+  postId   String
+  post     Post   @relation(fields: [postId], references: [id]) // many to one with post
+}
+
+model Like {
+  id        String   @id @default(uuid())
+  post      Post     @relation(fields: [postId], references: [id]) // many to one with post
+  postId    String
+  user      User     @relation(fields: [userId], references: [id]) // many to one with user
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Comment {
+  id        String    @id @default(uuid())
+  content   String
+  author    User      @relation(fields: [authorId], references: [id]) // many to one with user
+  authorId  String
+  post      Post      @relation(fields: [postId], references: [id]) // many to one with post
+  postId    String
+  replies   Comment[] @relation("ReplyToComment") // one to many with comments
+  parent    Comment?  @relation("ReplyToComment", fields: [commentId], references: [id]) // one to many with comments
+  commentId String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Hashtag {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  posts     Post[] // many to many with posts
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
