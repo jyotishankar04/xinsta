@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { verifyAuthJWTtoken } from "../src/client/services/auth.service";
-import { CustomRequest } from "../types/types";
+import { CustomRequest } from "../types/globl.types";
 
 const authMiddleware = async (
   req: Request,

@@ -23,6 +23,37 @@ const uploadOnCloudinary = async (localFilePath: string, folder?: string) => {
   }
 };
 
+const uploadMultipleOnCloudinary = async (
+  localFilePaths: string[],
+  folder?: string
+) => {
+  try {
+    if (!localFilePaths) return null;
+    const response = await Promise.all(
+      localFilePaths.map((localFilePath) =>
+        cloudinary.uploader.upload(localFilePath, {
+          resource_type: "auto",
+          folder: folder || "xinsta/temp",
+        })
+      )
+    );
+    localFilePaths.forEach((localFilePath) => {
+      fs.unlinkSync(localFilePath);
+    });
+    return response.map((res) => {
+      return {
+        public_id: res.public_id,
+        secure_url: res.secure_url,
+      };
+    });
+  } catch (error) {
+    localFilePaths.forEach((localFilePath) => {
+      fs.unlinkSync(localFilePath);
+    });
+    return null;
+  }
+};
+
 const deleteOnCloudinary = async (publicId: string) => {
   try {
     return await cloudinary.uploader.destroy(publicId);
@@ -39,5 +70,10 @@ const deleteMultipleOnCloudinary = async (publicIds: string[]) => {
   }
 };
 
-export { uploadOnCloudinary, deleteOnCloudinary, deleteMultipleOnCloudinary };
+export {
+  uploadOnCloudinary,
+  deleteOnCloudinary,
+  deleteMultipleOnCloudinary,
+  uploadMultipleOnCloudinary,
+};
 export default cloudinary;

@@ -7,5 +7,15 @@ export interface CustomRequest extends Request {
   };
   files?: {
     avatar: Express.Multer.File[];
+    postImages: Express.Multer.File[];
   };
+}
+
+export interface Post {
+  id: string;
+  caption: string;
+  hashtags: string;
+  userId: string;
+  createdAt: Date;
+  updatedAt: Date;
 }

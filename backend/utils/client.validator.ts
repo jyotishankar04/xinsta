@@ -31,4 +31,15 @@ const updateUserSchema = z.object({
   bio: z.string({ message: "Enter a valid string." }).optional(),
 });
 
-export { registerSchema, otpVerificationSchema, updateUserSchema };
+// ! Post upload schema
+
+const postUploadSchema = z.object({
+  caption: z.string().optional(),
+});
+
+export {
+  registerSchema,
+  otpVerificationSchema,
+  updateUserSchema,
+  postUploadSchema,
+};

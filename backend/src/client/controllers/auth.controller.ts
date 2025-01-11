@@ -186,7 +186,7 @@ const verifyEmail = async (
           email: user.email,
           username: user.username,
           avatar: user.avatar,
-          isVerified: user.isVerified,
+          isVerified: true,
           bio: user.bio,
           dob: user.dob,
           lastLogin: user.lastLogin,

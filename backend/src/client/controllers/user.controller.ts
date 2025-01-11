@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { CustomRequest } from "../../../types/types";
+import { CustomRequest } from "../../../types/globl.types";
 import { updateUserSchema } from "../../../utils/client.validator";
 import { getZodErrorMessage } from "../../../utils/error.utils";
 import prisma from "../../../config/prisma.config";
